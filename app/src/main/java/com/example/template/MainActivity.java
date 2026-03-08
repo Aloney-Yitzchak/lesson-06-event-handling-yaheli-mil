@@ -12,25 +12,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-/**
- * שיעור 6: טיפול באירועים (Event Handling)
- * ============================================
- * המשימה שלך: השלם את הקוד בכל מקום שכתוב TODO
- *
- * מה האפליקציה צריכה לעשות:
- *  1. המשתמש מזין שם בשדה הטקסט
- *  2. לחיצה על "ברוך הבא" מציגה: "שלום, [שם]! ברוך הבא לאפליקציה!"
- *  3. לחיצה על "נקה" מאפסת את כל השדות
- */
 public class MainActivity extends AppCompatActivity {
 
     // ======== הצהרת משתנים ========
-    // TODO שלב א: הצהר כאן על ארבעה משתנים מסוג:
-    //   EditText, Button, Button, TextView
-    // דוגמה: private EditText editTextName;
-
-    // כתוב כאן את ההצהרות שלך:
-
+    // שלב א: הצהרה על ארבעת המשתנים
+    private EditText editTextName;
+    private Button buttonWelcome;
+    private Button buttonClear;
+    private TextView textViewMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,29 +35,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // ======== שלב ב: חיבור Views ========
-        // TODO: חבר כל View לפי ה-ID שהגדרת ב-activity_main.xml
-        // דוגמה: editTextName = findViewById(R.id.editTextName);
-
-        // כתוב כאן את ה-findViewById שלך:
-
+        // מחברים את המשתנים לרכיבים שעיצבת במסך (לפי ה-ID שלהם)
+        editTextName = findViewById(R.id.editTextName);
+        buttonWelcome = findViewById(R.id.buttonWelcome);
+        buttonClear = findViewById(R.id.buttonClear);
+        textViewMessage = findViewById(R.id.textViewMessage);
 
         // ======== שלב ג: כפתור "ברוך הבא" ========
-        // TODO: הגדר OnClickListener על כפתור "ברוך הבא"
-        //   כשלוחצים:
-        //   1. קרא את השם מה-EditText (השתמש ב- .getText().toString() )
-        //   2. בנה הודעת ברכה: "שלום, " + name + "! ברוך הבא לאפליקציה!"
-        //   3. הצג את ההודעה ב-TextView
-
-        // כתוב כאן:
-
+        // מגדירים מה יקרה בלחיצה על הכפתור
+        buttonWelcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 1. קוראים את השם שהמשתמש הקליד
+                String name = editTextName.getText().toString();
+                // 2. בונים את הודעת הברכה
+                String message = "שלום, " + name + "! ברוך הבא לאפליקציה!";
+                // 3. מציגים את ההודעה על המסך
+                textViewMessage.setText(message);
+            }
+        });
 
         // ======== שלב ד: כפתור "נקה" ========
-        // TODO: הגדר OnClickListener על כפתור "נקה"
-        //   כשלוחצים:
-        //   1. נקה את ה-EditText (השתמש ב- .setText("") )
-        //   2. נקה את ה-TextView
-
-        // כתוב כאן:
-
+        // מגדירים מה יקרה בלחיצה על כפתור הניקוי
+        buttonClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // מרוקנים את שדה הטקסט של הקלט
+                editTextName.setText("");
+                // מרוקנים את הודעת הברכה
+                textViewMessage.setText("");
+            }
+        });
     }
 }
